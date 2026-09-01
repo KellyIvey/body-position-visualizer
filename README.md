@@ -1,6 +1,7 @@
 # Body Position & Articulation Visualizer
 
 > An interactive 3D web application for visualizing human body positions and joint articulations.
+> Also available as a **standalone desktop app** for Windows, macOS, and Linux — no browser needed!
 
 ![Screenshot Placeholder](docs/screenshot.png)
 
@@ -23,9 +24,10 @@
 | @react-three/drei | R3F helpers (OrbitControls, Grid, etc.) |
 | Zustand | State management |
 | Tailwind CSS | Styling |
+| **Electron** | **Desktop app wrapper** |
 | Vitest + RTL | Unit testing |
 
-## Setup
+## Setup (Web / Browser)
 
 ```bash
 npm install
@@ -33,6 +35,33 @@ npm run dev
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+## Desktop App
+
+### Run as desktop app (development)
+
+```bash
+npm install
+npm run electron:dev
+```
+
+A native window will open — no browser required.
+
+### Build an installer (distributable)
+
+```bash
+# Build for your current platform (auto-detects Windows / Mac / Linux)
+npm run electron:build
+
+# Or target a specific platform:
+npm run electron:build:win    # Windows → release/Body Position Visualizer Setup.exe
+npm run electron:build:mac    # macOS  → release/Body Position Visualizer.dmg
+npm run electron:build:linux  # Linux  → release/Body Position Visualizer.AppImage
+```
+
+The installer/package will appear in the `release/` folder. Double-click it to install and run — **no Node.js or browser needed** on the end user's machine.
+
+> **Note:** To add a custom icon, place `icon.ico` (Windows), `icon.icns` (macOS), and `icon.png` (Linux) in the `build/` folder. See `build/README.md` for details.
 
 ## Environment Variables
 

@@ -141,10 +141,11 @@ export const POSE_PRESETS: PosePreset[] = [
 ];
 
 /**
- * Returns the T-Pose (default/reset pose).
+ * Returns a deep copy of the T-Pose (default/reset pose).
+ * Returns a copy to prevent callers from mutating the preset definition.
  */
 export function getDefaultPose(): PoseAngles {
-  return POSE_PRESETS.find((p) => p.id === 'tpose')!.angles;
+  return structuredClone(POSE_PRESETS.find((p) => p.id === 'tpose')!.angles);
 }
 
 /**
