@@ -1,0 +1,92 @@
+{
+  "name": "body-position-visualizer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist-electron/electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "lint": "tsc --noEmit",
+    "electron:compile": "tsc --project tsconfig.electron.json",
+    "electron:dev": "concurrently -k \"cross-env NODE_ENV=development vite\" \"wait-on tcp:5173 && cross-env NODE_ENV=development electron .\"",
+    "electron:build": "npm run build && npm run electron:compile && electron-builder",
+    "electron:build:win": "npm run build && npm run electron:compile && electron-builder --win",
+    "electron:build:mac": "npm run build && npm run electron:compile && electron-builder --mac",
+    "electron:build:linux": "npm run build && npm run electron:compile && electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.kellyivey.body-position-visualizer",
+    "productName": "Body Position Visualizer",
+    "directories": {
+      "buildResources": "build",
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*"
+    ],
+    "win": {
+      "target": [
+        { "target": "nsis", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.ico"
+    },
+    "mac": {
+      "target": [
+        { "target": "dmg", "arch": ["x64", "arm64"] }
+      ],
+      "icon": "build/icon.icns",
+      "category": "public.app-category.healthcare-fitness"
+    },
+    "linux": {
+      "target": [
+        { "target": "AppImage", "arch": ["x64"] }
+      ],
+      "icon": "build/icon.png",
+      "category": "Science"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.105.4",
+    "@react-three/fiber": "^8.16.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "three": "^0.166.1",
+    "zustand": "^4.5.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/node": "^20.14.11",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@types/three": "^0.166.0",
+    "@vitejs/plugin-react": "^4.3.1",
+    "@vitest/coverage-v8": "^4.1.11",
+    "autoprefixer": "^10.4.19",
+    "concurrently": "^10.0.5",
+    "cross-env": "^10.1.0",
+    "electron": "^44.1.0",
+    "electron-builder": "^26.15.3",
+    "jsdom": "^24.1.1",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3",
+    "vite": "^8.2.2",
+    "vite-node": "^6.0.0",
+    "vitest": "^4.1.11",
+    "wait-on": "^9.1.0"
+  }
+}
